@@ -6,14 +6,16 @@ import 'react-day-picker/dist/style.css';
 
 export const VCalendar = () => {
   const [date, setDate] = useState(new Date());
-  const formsubmit =event=>{
+  const formsubmit =(event)=>{
     event.preventDefault();
     const task = {
       title: event.target.title.value,
       description: event.target.description.value,
-    };
-    const {data} = axios.post('http://localhost:5000/task',task);
+      date,
+    }
+    axios.post('http://localhost:5000/task',task);
        event.target.reset();
+       alert('Data Saved')
   };
   return (
    <div className='justify-between'>
@@ -24,7 +26,7 @@ export const VCalendar = () => {
   <div class="card-body">
  <div className='flex bg-base-100 shadow-xl w-80'>
  <form onSubmit={formsubmit}>
-  <h3>Date: {format(date, 'PP')} </h3>
+  <h3>Date: {format(date, 'PP') } </h3>
   <input type="text" placeholder="Title" name='title' class="input input-bordered w-full max-w-xs" />
   <textarea class="textarea textarea-accent w-80 mt-4 h-44" name='description' placeholder="Description"></textarea>
   <button type='submit' class="btn btn-primary mt-3 mb-4">Add Task</button>

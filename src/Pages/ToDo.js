@@ -1,21 +1,27 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { Task } from './Task';
+
 
 export const ToDo = () => {
+  const [task, setTask] = useState([])
+  useEffect(()=>{
+    (async()=>{
+      await axios.get('http://localhost:5000/task')
+      .then(res=>{
+        const data = res.data;
+        setTask(data)
+      })
+    })()
+  },[])
   return (
     <div>
-      <div>To-Do</div>
-      <div class="card w-96 bg-base-100 shadow-xl">
-  <div class="card-body">
-    <div class="card-actions justify-end">
-    </div>
-    <textarea class="textarea textarea-primary h-48" disabled></textarea>
-    <div className='flex justify-evenly'>
-    <button class="btn btn-sm">Edit</button>
-    <button class="btn btn-sm">Delete</button>
-    </div>
-  </div>
-</div>
-    
+     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-2 ml-12 mt-3'>
+            
+            {
+                task.map(task=><Task key={task._id} task={task}></Task>)
+            }
+        </div>
     </div>
   )
 }
