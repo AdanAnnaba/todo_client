@@ -7,7 +7,7 @@ export const ToDo = () => {
   const [task, setTask] = useState([])
   useEffect(()=>{
     (async()=>{
-      await axios.get('http://localhost:5000/task')
+      await axios.get('https://arctic-marks-64452.herokuapp.com/task')
       .then(res=>{
         const data = res.data;
         setTask(data)

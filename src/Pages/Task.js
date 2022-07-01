@@ -11,11 +11,11 @@ export const Task = ({task}) => {
         description: event.target.description.value,
       }
       console.log(task);
-      axios.put('http://localhost:5000/task/',task);
+      axios.put('https://arctic-marks-64452.herokuapp.com/task/',task);
     };
 
     const taskDelete = (id)=>{
-      axios.delete(`http://localhost:5000/task/${id}`);
+      axios.delete(`https://arctic-marks-64452.herokuapp.com/${id}`);
     }
     
   return (
